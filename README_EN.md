@@ -1,5 +1,7 @@
 # 🐲 dragonpilot (Custom Fork)
 
+> 🤖 All custom features and architectural enhancements in this fork were co-developed with **Gemini 3.8 Flash**.
+
 This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`), tailored for Comma 3 / 3X devices. It focuses on offline GPS country-based steering wheel initialization with permanent manual locking, full Traditional Chinese localization, CJK bitmap font atlas regeneration, and UI stability improvements.
 
 ---
@@ -60,3 +62,7 @@ This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`
 * **No 10-15 Minute Device Reboot**:
   * Established hot-reload deployment for pure Python, translation, and asset changes.
   * UI restarts and reloads changes via `selfdrive.ui` in ~1 second.
+
+### 8. 🤖 AI-Assisted Development
+* All custom features in this fork—including the offline GPS country bounding algorithms, permanent manual steering position lock, full-speed proportional gentle acceleration scaling, 2x distance early smooth braking kinematics, runtime Python PO translation parser, Raylib font atlas baking pipeline, and on-device hot-reload developer workflows—were developed, debugged, and verified end-to-end with **Gemini 3.8 Flash**.
+
