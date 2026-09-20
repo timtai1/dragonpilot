@@ -170,12 +170,27 @@ class DragonpilotLayout(Widget):
       if initial_val is None:
         initial_val = setting.get("default")
 
-      if item_type == "double_spin_button_item":
-        args["initial_value"] = float(initial_val)
-      elif item_type == "text_spin_button_item":
-        args["initial_index"] = int(initial_val)
-      else: # spin_button_item
-        args["initial_value"] = int(initial_val)
+      if isinstance(initial_val, bool):
+        initial_val = 1 if initial_val else 0
+      elif str(initial_val).lower() in ("true", "1"):
+        initial_val = 1
+      elif str(initial_val).lower() in ("false", "0"):
+        initial_val = 0
+
+      try:
+        if item_type == "double_spin_button_item":
+          args["initial_value"] = float(initial_val)
+        elif item_type == "text_spin_button_item":
+          args["initial_index"] = int(initial_val)
+        else: # spin_button_item
+          args["initial_value"] = int(initial_val)
+      except (ValueError, TypeError):
+        if item_type == "double_spin_button_item":
+          args["initial_value"] = 0.0
+        elif item_type == "text_spin_button_item":
+          args["initial_index"] = 0
+        else:
+          args["initial_value"] = 0
 
     # Initial enabled state from depends_on
     if "depends_on" in setting:
@@ -189,12 +204,16 @@ class DragonpilotLayout(Widget):
       elif item_type == "double_spin_button_item":
         primary_action = lambda val, p=param_name: ui_state.params.put(p, float(val))
       elif item_type == "text_spin_button_item":
-        def _put_text_spin(val, p=param_name):
-          try:
-            ui_state.params.put(p, int(val))
-          except TypeError:
-            ui_state.params.put_bool(p, bool(val))
-        primary_action = _put_text_spin
+        param_type = setting.get("param_type")
+        if param_type == "BOOL":
+          primary_action = lambda val, p=param_name: ui_state.params.put_bool(p, bool(val))
+        else:
+          def _put_text_spin(val, p=param_name):
+            try:
+              ui_state.params.put(p, int(val))
+            except TypeError:
+              ui_state.params.put_bool(p, bool(val))
+          primary_action = _put_text_spin
       else: # spin_button_item
         primary_action = lambda val, p=param_name: ui_state.params.put(p, int(val))
 
@@ -286,7 +305,9 @@ class DragonpilotLayout(Widget):
         raw_val = ui_state.params.get(param_name)
         val_str = None
         if raw_val is not None:
-          if isinstance(raw_val, bytes):
+          if isinstance(raw_val, bool):
+            val_str = "1" if raw_val else "0"
+          elif isinstance(raw_val, bytes):
             val_str = raw_val.decode()
           else:
             val_str = str(raw_val)
@@ -296,12 +317,20 @@ class DragonpilotLayout(Widget):
         if val_str is None:
           continue
 
-        if item_type == "double_spin_button_item":
-          widget.action_item.set_value(float(val_str))
-        elif item_type == "spin_button_item":
-          widget.action_item.set_value(int(val_str))
-        elif item_type == "text_spin_button_item":
-          widget.action_item.set_index(int(val_str))
+        if str(val_str).lower() in ("true", "1"):
+          val_str = "1"
+        elif str(val_str).lower() in ("false", "0"):
+          val_str = "0"
+
+        try:
+          if item_type == "double_spin_button_item":
+            widget.action_item.set_value(float(val_str))
+          elif item_type == "spin_button_item":
+            widget.action_item.set_value(int(val_str))
+          elif item_type == "text_spin_button_item":
+            widget.action_item.set_index(int(val_str))
+        except (ValueError, TypeError):
+          pass
 
   def _render(self, rect):
     self._scroller.render(rect)
