@@ -8,11 +8,31 @@ This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`
 
 ## 📦 Installation Guide
 
-Designed for **Comma 3** and **Comma 3X** devices. Since this repository is hosted under `timtai1/dragonpilot`, please use the following standard installation instructions:
+Designed for **Comma 3** and **Comma 3X** devices.
 
-### Recommended: Clean Installation via SSH (Standard & Reliable)
+---
 
-#### 1. Fresh Install
+### Method 1: On-Device Touchscreen Installation (Recommended & Simplest)
+
+If your device is freshly restored (AGNOS Setup Wizard) or after choosing "Uninstall Software":
+
+1. On the setup screen, tap **"Custom Software"**.
+2. Enter either of the following in the URL field:
+   * **Short Format (Recommended)**:
+     ```text
+     timtai1/0.11.1
+     ```
+   * **Full URL Format**:
+     ```text
+     https://installer.comma.ai/timtai1/0.11.1
+     ```
+3. Tap Enter/Continue. The device will automatically download the `0.11.1` branch from `github.com/timtai1/openpilot`, compile, and launch!
+
+---
+
+### Method 2: Installation via SSH (Advanced / Debugging)
+
+#### 1. Fresh Install via SSH
 To wipe existing software and install this fork cleanly:
 ```bash
 # 1. SSH into the Comma device
@@ -21,7 +41,7 @@ ssh comma@<DEVICE_IP>
 # 2. Remove existing openpilot and clone this repository
 cd /data
 rm -rf openpilot
-git clone -b 0.11.1 --depth 1 https://github.com/timtai1/dragonpilot.git openpilot
+git clone -b 0.11.1 --depth 1 https://github.com/timtai1/openpilot.git openpilot
 
 # 3. Reboot device to compile and launch
 reboot
@@ -31,18 +51,11 @@ reboot
 If your device already has a working openpilot/dragonpilot directory and you wish to switch:
 ```bash
 cd /data/openpilot
-git remote set-url origin https://github.com/timtai1/dragonpilot.git
+git remote set-url origin https://github.com/timtai1/openpilot.git
 git fetch origin 0.11.1
 git checkout -B 0.11.1 origin/0.11.1
 reboot
 ```
-
----
-
-### 💡 Notice Regarding On-Device Custom Software URL Setup
-> [!NOTE]
-> The official `installer.comma.ai/<username>/<branch>` URL service used during the AGNOS setup wizard is hardcoded to clone repositories specifically named `openpilot` (i.e. `github.com/<username>/openpilot`).
-> Because this repository is named **`dragonpilot`** (`github.com/timtai1/dragonpilot`), typing `installer.comma.ai/timtai1/0.11.1` on the device screen will return a 404 error unless a repository named `openpilot` is created on GitHub. The recommended and guaranteed method is the **SSH installation** documented above.
 
 ---
 
