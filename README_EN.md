@@ -25,25 +25,34 @@ This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`
   * Description: *Wheel on left, such as US, TW. Wheel on right like HK, JP.*
   * Settings are persistently stored (`PERSISTENT`) across reboots.
 
-### 3. 🇹🇼 Full Traditional Chinese & Multilingual UI Support
+### 3. 🍃 Gentle Acceleration & Early Smooth Deceleration
+* **Gentle Acceleration Setting**:
+  * Added "Gentle Acceleration" setting under dp Longitudinal menu.
+  * Four configurable maximum launch acceleration limits: `1.0`, `1.2`, `1.4`, `1.6` m/s² (Default is **`1.2` m/s²**).
+  * Eliminates harsh takeoff punch (stock is 1.6 m/s²), providing silky smooth acceleration from a stop.
+* **Early Smooth Braking (2x Distance, 1/2 Deceleration)**:
+  * Eliminates abrupt late braking when approaching stopped or slow-moving lead vehicles at red lights.
+  * Initiates gentle deceleration at twice the original distance, halving the required deceleration to ~1.25 m/s² (compared to stock 2.5 m/s²).
+
+### 4. 🇹🇼 Full Traditional Chinese & Multilingual UI Support
 * **Localization Engine Refactor**:
   * Rewrote `multilang.py` to directly parse and load `dragonpilot_{lang}.po` files at runtime without requiring precompiled `.mo` binaries.
 * **100% Traditional Chinese Translation**:
   * Completed full translation coverage for `dragonpilot_zh-CHT.po`.
   * Resolved the issue where dp settings remained in English even when system language was set to Traditional Chinese.
 
-### 4. 🔤 Bitmap Font Atlas Baking (Resolves '?' Glyph Rendering)
+### 5. 🔤 Bitmap Font Atlas Baking (Resolves '?' Glyph Rendering)
 * **Font Processing Tooling**:
   * Updated `selfdrive/assets/fonts/process.py` to automatically harvest all Chinese characters from `.po` files.
 * **Regenerated CJK Bitmap Font Atlases**:
   * Re-baked Raylib font atlases (`OpFont-*.fnt` / `OpFont-*.png`) on the Comma device.
   * Completely resolved missing Chinese glyphs rendering as question marks (`?`).
 
-### 5. ⚡ UI Stability Fixes (Crash Prevention)
+### 6. ⚡ UI Stability Fixes (Crash Prevention)
 * **Fixed Menu Crashes**:
   * Resolved `ValueError` caused by string-to-int conversion on boolean parameters (`int("False")`), which previously caused the UI to crash back to the comma boot logo when opening dp settings.
 
-### 6. 🔄 Fast Hot-Reload Deployment Workflow
+### 7. 🔄 Fast Hot-Reload Deployment Workflow
 * **No 10-15 Minute Device Reboot**:
   * Established hot-reload deployment for pure Python, translation, and asset changes.
   * UI restarts and reloads changes via `selfdrive.ui` in ~1 second.

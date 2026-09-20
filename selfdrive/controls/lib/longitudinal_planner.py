@@ -18,6 +18,8 @@ from dragonpilot.selfdrive.controls.lib.acm import ACM
 from dragonpilot.selfdrive.controls.lib.aem import AEM
 from dragonpilot.selfdrive.controls.lib.apm import APM
 
+from openpilot.common.params import Params
+
 A_CRUISE_MAX_VALS = [1.6, 1.2, 0.8, 0.6]
 A_CRUISE_MAX_BP = [0., 10.0, 25., 40.]
 CONTROL_N_T_IDX = ModelConstants.T_IDXS[:CONTROL_N]
@@ -35,8 +37,9 @@ class DPFlags:
   pass
 
 
-def get_max_accel(v_ego):
-  return np.interp(v_ego, A_CRUISE_MAX_BP, A_CRUISE_MAX_VALS)
+def get_max_accel(v_ego, max_launch_accel=1.2):
+  vals = [max_launch_accel, min(max_launch_accel, 1.2), 0.8, 0.6]
+  return np.interp(v_ego, A_CRUISE_MAX_BP, vals)
 
 def get_coast_accel(pitch):
   return np.sin(pitch) * -5.65 - 0.3  # fitted from data using xx/projects/allow_throttle/compute_coast_accel.py
@@ -75,6 +78,9 @@ class LongitudinalPlanner:
     self.acm = ACM()
     self.aem = AEM()
     self.apm = APM()
+    self.params = Params()
+    self.param_read_counter = 0
+    self.max_launch_accel = 1.2
 
   @staticmethod
   def parse_model(model_msg):
@@ -118,7 +124,20 @@ class LongitudinalPlanner:
     # No change cost when user is controlling the speed, or when standstill
     prev_accel_constraint = not (reset_state or sm['carState'].standstill)
 
-    accel_clip = [ACCEL_MIN, get_max_accel(v_ego)]
+    # dp - read gentle acceleration setting (1.0, 1.2, 1.4, 1.6 m/s²)
+    self.param_read_counter += 1
+    if self.param_read_counter % 50 == 0:
+      try:
+        val = self.params.get("dp_lon_smooth_accel")
+        if val is not None:
+          options = [1.0, 1.2, 1.4, 1.6]
+          idx = int(val)
+          if 0 <= idx < len(options):
+            self.max_launch_accel = options[idx]
+      except Exception:
+        pass
+
+    accel_clip = [ACCEL_MIN, get_max_accel(v_ego, self.max_launch_accel)]
     steer_angle_without_offset = sm['carState'].steeringAngleDeg - sm['liveParameters'].angleOffsetDeg
     accel_clip = limit_accel_in_turns(v_ego, steer_angle_without_offset, accel_clip, self.CP)
 
@@ -140,6 +159,19 @@ class LongitudinalPlanner:
 
     if force_slow_decel:
       v_cruise = 0.0
+
+    # dp - Early smooth deceleration when approaching a stopped or slowing lead vehicle
+    # Standard openpilot only brakes when close (~40-50m at 54km/h) with heavy COMFORT_BRAKE = 2.5 m/s² (~0.26g).
+    # Here, we initiate gentle deceleration (~1.25 m/s², half of stock 2.5 m/s²) at ~2x distance.
+    lead = sm['radarState'].leadOne
+    if lead.status and lead.modelProb > 0.4:
+      v_lead = max(0.0, lead.vLead)
+      if v_ego > v_lead:
+        stop_buffer = 7.5
+        d_eff = max(0.0, lead.dRel - stop_buffer)
+        a_gentle_decel = 1.25
+        v_smooth_target = math.sqrt(v_lead ** 2 + 2 * a_gentle_decel * d_eff)
+        v_cruise = min(v_cruise, v_smooth_target)
 
     personality = sm['selfdriveState'].personality
     if dp_flags & DPFlags.APM:

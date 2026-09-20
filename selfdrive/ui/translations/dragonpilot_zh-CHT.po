@@ -550,6 +550,16 @@ msgid ""
 "device_ip&gt;:5088 to access.<br><br>Enable this to use Tesla Visual/HUD."
 msgstr "dashy - dragonpilot 全方位系統中心。<br><br>造訪 http://<裝置IP>:5088 即可存取。<br><br>啟用此項目以使用特斯拉視覺/HUD。"
 
+#: dragonpilot/settings/min-feat.lon.gentle-accel.py:8
+#, python-format
+msgid "Gentle Acceleration"
+msgstr "溫和加速"
+
+#: dragonpilot/settings/min-feat.lon.gentle-accel.py:9
+#, python-format
+msgid "Limits launch acceleration (1.0 - 1.6 m/s²). Default is 1.2 m/s². Provides smoother takeoffs."
+msgstr "限制起步加速度 (1.0 - 1.6 m/s²)。預設為 1.2 m/s²。提供更平順的起步體驗。"
+
 #: dragonpilot/settings/min-feat.ui.hide-hud.py:14
 #, python-format
 msgid "km/h"
