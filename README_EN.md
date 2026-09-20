@@ -1,94 +1,40 @@
-![](dragonpilot/selfdrive/assets/dragonpilot.png)
+# 🐲 dragonpilot (Custom Fork)
 
-[Read this in Chinese](README.md)
+This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`), tailored for Comma 3 / 3X devices. It focuses on manual steering wheel position control, full Traditional Chinese localization, CJK bitmap font atlas regeneration, and UI stability improvements.
 
-# **🐲 dragonpilot - Bringing the Spirit of the Dragon to Your Car**
+---
 
-**Join us on a smarter, more thoughtful driving journey.**
+## 🚀 Key Custom Features & Updates
 
-## **👋 Welcome, friend!**
+### 1. 🎡 Manual Wheel Position Setting ("Wheel on Left or Right?")
+* **Custom Settings Toggle**:
+  * Added "Wheel on Left or Right?" toggle at the end of the dp settings menu.
+  * Options: `Left` (default) and `Right`.
+  * Description: *Wheel on left, such as US, TW. Wheel on right like HK, JP.*
+* **Eliminated Dynamic Sensor Guesswork**:
+  * Completely removed the dynamic facial/posture statistical filtering algorithm in `policy.py` that previously attempted to guess wheel position via the driver camera.
+  * Directly reads the manual setting (`dp_dev_is_rhd`), avoiding misdetections caused by night driving, backlight, or driver posture.
+  * Setting is permanently stored (`PERSISTENT`) and will never automatically change when crossing borders.
 
-`dragonpilot` was launched in 2019 by three early openpilot enthusiasts from the Chinese community. Our mission was simple: create a friendly space for users to share experiences, provide easier setup help, and add features tailored for local needs.
+### 2. 🇹🇼 Full Traditional Chinese & Multilingual UI Support
+* **Localization Engine Refactor**:
+  * Rewrote `multilang.py` to directly parse and load `dragonpilot_{lang}.po` files at runtime without requiring precompiled `.mo` binaries.
+* **100% Traditional Chinese Translation**:
+  * Completed full translation coverage for `dragonpilot_zh-CHT.po`.
+  * Resolved the issue where dp settings remained in English even when system language was set to Traditional Chinese.
 
-Localization has always been at the heart of what we do—starting with a fully Chinese interface. This made `dragonpilot` quickly popular in Chinese-speaking regions and helped our user base grow into one of the largest worldwide. That community support is what keeps us moving forward.
+### 3. 🔤 Bitmap Font Atlas Baking (Resolves '?' Glyph Rendering)
+* **Font Processing Tooling**:
+  * Updated `selfdrive/assets/fonts/process.py` to automatically harvest all Chinese characters from `.po` files.
+* **Regenerated CJK Bitmap Font Atlases**:
+  * Re-baked Raylib font atlases (`OpFont-*.fnt` / `OpFont-*.png`) on the Comma device.
+  * Completely resolved missing Chinese glyphs rendering as question marks (`?`).
 
-Built on top of the powerful [openpilot](https://github.com/commaai/openpilot)—an open-source driver assistance system rated by Consumer Reports as outperforming commercial offerings—we add localized refinements and user-focused features to create a driving companion that truly fits your needs. (You can also see the [original openpilot README](README_OPENPILOT.md) preserved in our repo.)
+### 4. ⚡ UI Stability Fixes (Crash Prevention)
+* **Fixed Menu Crashes**:
+  * Resolved `ValueError` caused by string-to-int conversion on boolean parameters (`int("False")`), which previously caused the UI to crash back to the comma boot logo when opening dp settings.
 
-The name `dragonpilot` reflects our vision: like the dragon of mythology, it is strong and wise, guarding your safety on the road. In Chinese culture, the dragon is also a symbol of luck and strength, representing our roots and pride.
-
-## **✨ Milestones**
-
-Beyond carrying forward openpilot's core strengths, we've reached several milestones inspired by community feedback:
-
-* **🚘 Always Lane Keep Assist (ALKA)**
-
-  More than a feature—it's part of the `dragonpilot` philosophy. Introduced as early as [version 0.6.2](https://github.com/dragonpilot-community/dragonpilot/blob/2861467183d62151024320447ba04d18fc3fe1e6/selfdrive/car/toyota/carstate.py#L199), first tested on a 2017 Lexus IS300h, then expanded to Toyota's lineup and beyond. ALKA helps keep your vehicle steadily centered, giving you extra confidence on the road.
-
-* **🌐 First to add multilingual support**
-
-  Before openpilot officially supported it, we had already introduced multiple languages. `dragonpilot` fully supports Traditional Chinese, Simplified Chinese, and English.
-
-* **💻 Only community fork to support multiple hardware platforms at once**
-
-  We uniquely worked to make the project run on EON, comma two, comma 3, and Jetson—serving the widest range of users possible.
-  Additionally, after the comma.ai team deprecated the comma 3 in version 0.10.0, we remain the only community fork to offer full, simultaneous support for the comma 3, comma 3X, and the O3, O3L, and O3XL (the O3 series being third-party hardware).
-
-* **📜 Once recognized as the #1 openpilot fork**
-
-  Thanks to an active community and continuous innovation, `dragonpilot` was once the largest openpilot fork officially recognized by comma ai. This honor belongs to everyone who contributed.
-
-## **🔥 Recent Custom Features & Updates**
-
-This branch (`0.11.1`) introduces several custom enhancements and stability fixes for Comma 3 / 3X:
-
-* **🎡 Manual Wheel Position Setting ("Wheel on Left or Right?")**
-  * **Custom Setting Toggle**: Added a manual switch at the end of the dp settings menu (`Left` / `Right`, default is `Left`).
-  * **Eliminated Dynamic Misdetection**: Completely removed the dynamic driver-camera filter that guessed wheel position in `policy.py`. The system now strictly follows your manual choice, preventing misdetections due to lighting or body posture, and will never automatically toggle when driving across borders.
-
-* **🇹🇼 Traditional Chinese & Multilingual UI Support**
-  * **Multilang Parser Refactor**: Re-implemented `multilang.py` to directly load `po` translation files at runtime.
-  * **100% Traditional Chinese Localization**: Completed translations for `dragonpilot_zh-CHT.po`, resolving the issue where dp menus remained in English.
-
-* **🔤 Bitmap Font Atlas Baking (Resolves '?' Glyph Issue)**
-  * **Font Tooling Update**: Updated `selfdrive/assets/fonts/process.py` to extract all characters from `dragonpilot_*.po`.
-  * **Regenerated CJK Font Atlases**: Re-baked Raylib bitmap font atlases (`OpFont-*.fnt` / `OpFont-*.png`) on device to eliminate missing Chinese characters showing up as question marks (`?`).
-
-* **⚡ UI Stability & Fast Hot Reload**
-  * **Crash Prevention**: Fixed boolean parameter type conversion causing UI crashes when entering the dp settings menu.
-  * **Fast Sync & Reload Workflow**: Established a fast hot-reload workflow via SSH (`pkill -f 'selfdrive.ui'`), applying UI updates in ~1 second without requiring a 10-15 minute device reboot.
-
-## **🧑‍💻 Design Philosophy - Less is More**
-
-As openpilot's AI grows stronger, many features that once required manual tuning are now handled by advanced models. That's why our focus has returned to **“minimal changes.”**
-
-We aim to give you the purest, most official-like openpilot driving experience—while preserving `dragonpilot`'s classic, community-loved features. With a solid AI foundation, simplicity is strength.
-
-## **🛠️ Hardware Journey**
-
-From the early **EON**, to official devices like **comma two / three (C2/C3/C3X)**, to creative community builds (**C1.5, O2, O3, O3L, O3XL, etc.**), and even experiments with [**Jetson Xavier NX**](https://github.com/eFiniLan/xnxpilot).
-
-Currently, the latest versions support: **comma3 / 3X** and community hardware like **O3 / O3L / O3XL**.
-Older devices such as **EON / C1.5 / C2** are supported in the [d2 branch](https://github.com/dragonpilot-community/dragonpilot/tree/d2).
-Whatever device you're on, it represents your passion for open-source driver assistance.
-
-## **🫂 Join Us – Become a “Dragon Seeker”**
-
-`dragonpilot` thrives thanks to every user's contributions and feedback. We're an open, transparent, and welcoming community where enthusiasts can share experiences with openpilot and `dragonpilot`.
-
-[**Join our Facebook group here!**](https://www.facebook.com/groups/930190251238639)
-
-## **❤️ Special Thanks**
-
-Since day one, `dragonpilot` has never asked for funding through Patreon or similar platforms. Our vision is a community where everyone learns and grows together. It's about fun, not money.
-
-That said, we're deeply grateful to those who voluntarily supported the project. Your encouragement keeps us motivated to keep building.
-
-[**See our sponsors**](SPONSORS.md)
-
-### **Safety Notice**
-
-`dragonpilot` is a driver **assistance** system, not full self-driving. It reduces fatigue and improves safety, but you must remain alert and ready to take control at all times. Always follow your local traffic laws.
-
-**Thanks again for being here.**
-
-**We look forward to riding the “dragon” with you on the road to smarter driving!**
+### 5. 🔄 Fast Hot-Reload Deployment Workflow
+* **No 10-15 Minute Device Reboot**:
+  * Established hot-reload deployment for pure Python, translation, and asset changes.
+  * UI restarts and reloads changes via `selfdrive.ui` in ~1 second.
