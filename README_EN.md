@@ -37,6 +37,26 @@ Beyond carrying forward openpilot's core strengths, we've reached several milest
 
   Thanks to an active community and continuous innovation, `dragonpilot` was once the largest openpilot fork officially recognized by comma ai. This honor belongs to everyone who contributed.
 
+## **🔥 Recent Custom Features & Updates**
+
+This branch (`0.11.1`) introduces several custom enhancements and stability fixes for Comma 3 / 3X:
+
+* **🎡 Manual Wheel Position Setting ("Wheel on Left or Right?")**
+  * **Custom Setting Toggle**: Added a manual switch at the end of the dp settings menu (`Left` / `Right`, default is `Left`).
+  * **Eliminated Dynamic Misdetection**: Completely removed the dynamic driver-camera filter that guessed wheel position in `policy.py`. The system now strictly follows your manual choice, preventing misdetections due to lighting or body posture, and will never automatically toggle when driving across borders.
+
+* **🇹🇼 Traditional Chinese & Multilingual UI Support**
+  * **Multilang Parser Refactor**: Re-implemented `multilang.py` to directly load `po` translation files at runtime.
+  * **100% Traditional Chinese Localization**: Completed translations for `dragonpilot_zh-CHT.po`, resolving the issue where dp menus remained in English.
+
+* **🔤 Bitmap Font Atlas Baking (Resolves '?' Glyph Issue)**
+  * **Font Tooling Update**: Updated `selfdrive/assets/fonts/process.py` to extract all characters from `dragonpilot_*.po`.
+  * **Regenerated CJK Font Atlases**: Re-baked Raylib bitmap font atlases (`OpFont-*.fnt` / `OpFont-*.png`) on device to eliminate missing Chinese characters showing up as question marks (`?`).
+
+* **⚡ UI Stability & Fast Hot Reload**
+  * **Crash Prevention**: Fixed boolean parameter type conversion causing UI crashes when entering the dp settings menu.
+  * **Fast Sync & Reload Workflow**: Established a fast hot-reload workflow via SSH (`pkill -f 'selfdrive.ui'`), applying UI updates in ~1 second without requiring a 10-15 minute device reboot.
+
 ## **🧑‍💻 Design Philosophy - Less is More**
 
 As openpilot's AI grows stronger, many features that once required manual tuning are now handled by advanced models. That's why our focus has returned to **“minimal changes.”**
