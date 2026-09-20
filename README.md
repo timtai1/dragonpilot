@@ -8,37 +8,17 @@
 
 ## 📦 安裝步驟 (Installation Guide)
 
-本分支專為 **Comma 3** 與 **Comma 3X** 裝置設計，您可以選擇以下任一種方式進行安裝：
+本分支專為 **Comma 3** 與 **Comma 3X** 裝置設計。由於本專案在 GitHub 上的儲存庫名稱為 `dragonpilot`，請參考以下標準安裝指引：
 
-### 方法一：透過 Comma 裝置螢幕安裝（推薦，最簡單）
+### 推薦方式：透過 SSH 指令安裝（最穩定、標準做法）
 
-1. **解除既有系統（若已安裝 openpilot）**：
-   * 進入裝置螢幕：`設定 (Settings)` -> `軟體 (Software)` -> 點擊 `解除安裝 openpilot (Uninstall openpilot)`。
-   * 系統將清除現有軟體並自動重新開機進入安裝引導畫面。
-2. **輸入自訂安裝網址**：
-   * 在開機設置引導畫面中，選擇 **`Custom Software`（自訂軟體）**。
-   * 輸入以下安裝網址（任選其一即可）：
-     ```text
-     https://installer.comma.ai/timtai1/0.11.1
-     ```
-     或使用精簡網址：
-     ```text
-     installer.comma.ai/timtai1/0.11.1
-     ```
-3. **完成安裝與重啟**：
-   * 點擊確認開始下載，下載完成後 Comma 將自動重新開機並載入繁體中文與最佳化設定。
-
----
-
-### 方法二：透過 SSH 指令全新安裝（適合進階使用者）
-
-如果您已經在 Comma 上啟用了 SSH 存取權限，可以直接透過電腦終端機執行以下指令：
-
+#### 1. 全新安裝 (Fresh Install)
+若要清除既有軟體並乾淨安裝本專案：
 ```bash
 # 1. SSH 連線進入 Comma 裝置
 ssh comma@<你的裝置IP>
 
-# 2. 清除既有 openpilot 目錄並下載本專案分支
+# 2. 清除舊目錄並下載本專案分支
 cd /data
 rm -rf openpilot
 git clone -b 0.11.1 --depth 1 https://github.com/timtai1/dragonpilot.git openpilot
@@ -47,12 +27,8 @@ git clone -b 0.11.1 --depth 1 https://github.com/timtai1/dragonpilot.git openpil
 reboot
 ```
 
----
-
-### 方法三：既有系統直接切換至本分支（免清除重裝）
-
-若您的裝置已安裝 dragonpilot 或 openpilot，想直接無損切換至本分支：
-
+#### 2. 既有系統直接切換分支 (In-Place Branch Switch)
+若裝置上已有正常運作的 openpilot / dragonpilot 目錄，想直接切換至本專案：
 ```bash
 cd /data/openpilot
 git remote set-url origin https://github.com/timtai1/dragonpilot.git
@@ -60,6 +36,13 @@ git fetch origin 0.11.1
 git checkout -B 0.11.1 origin/0.11.1
 reboot
 ```
+
+---
+
+### 💡 關於 Comma 螢幕自訂網址安裝說明
+> [!NOTE]
+> Comma 官方開機引導的 `installer.comma.ai/<username>/<branch>` 轉址服務，其底層預設強制對應名為 `openpilot` 的 GitHub 儲存庫（即 `github.com/<username>/openpilot`）。
+> 由於本專案儲存庫名稱為 **`dragonpilot`**（`github.com/timtai1/dragonpilot`），因此若要在 Comma 觸控螢幕的自訂軟體（Custom Software）輸入網址安裝，需先在 GitHub 上建立名為 `openpilot` 的儲存庫。目前最推薦且最穩妥的安裝方式為上述 **SSH 指令安裝**。
 
 ---
 
