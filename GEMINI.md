@@ -16,7 +16,7 @@ This repository contains a custom fork of `dragonpilot` (based on openpilot 0.11
 - **Remote Python venv**: `/usr/local/venv/bin/python3`
 - **Local Repository**: `<LOCAL_REPO_PATH>`
 - **Active Git Branch**: `0.11.1`
-- **GitHub Origin**: `https://github.com/<GITHUB_USER>/dragonpilot.git`
+- **GitHub Origin**: `https://github.com/<GITHUB_USER>/openpilot.git` (or SSH `git@github.com:<GITHUB_USER>/openpilot.git`)
 
 > [!IMPORTANT]
 > **Privacy & Security Notice**:
