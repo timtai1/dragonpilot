@@ -6,6 +6,63 @@ This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`
 
 ---
 
+## 📦 Installation Guide
+
+Designed for **Comma 3** and **Comma 3X** devices. Choose any of the following installation methods:
+
+### Method 1: On-Device Touchscreen Setup (Recommended & Easiest)
+
+1. **Uninstall Existing Software (if openpilot is already installed)**:
+   * On device screen, go to: `Settings` -> `Software` -> Tap `Uninstall openpilot`.
+   * The device will wipe the existing installation and reboot into the AGNOS setup wizard.
+2. **Enter Custom Installer URL**:
+   * On the setup screen, select **`Custom Software`**.
+   * Enter the installer URL (either format works):
+     ```text
+     https://installer.comma.ai/timtai1/0.11.1
+     ```
+     or simply:
+     ```text
+     installer.comma.ai/timtai1/0.11.1
+     ```
+3. **Finish & Reboot**:
+   * Confirm to start the download. Once complete, the Comma device will automatically reboot into this customized fork.
+
+---
+
+### Method 2: Clean Installation via SSH (Advanced Users)
+
+If SSH access is already configured on your Comma device:
+
+```bash
+# 1. SSH into the Comma device
+ssh comma@<DEVICE_IP>
+
+# 2. Clear old openpilot directory and clone this fork
+cd /data
+rm -rf openpilot
+git clone -b 0.11.1 --depth 1 https://github.com/timtai1/dragonpilot.git openpilot
+
+# 3. Reboot device to compile and launch
+reboot
+```
+
+---
+
+### Method 3: In-Place Branch Switch
+
+If you already have a working openpilot directory and want to switch to this fork without re-cloning:
+
+```bash
+cd /data/openpilot
+git remote set-url origin https://github.com/timtai1/dragonpilot.git
+git fetch origin 0.11.1
+git checkout -B 0.11.1 origin/0.11.1
+reboot
+```
+
+---
+
 ## 🚀 Key Custom Features & Updates
 
 ### 1. 🛰️ Steering Wheel Position: Offline GPS Country Auto-Initialization + Permanent Manual Lock (Featured)
