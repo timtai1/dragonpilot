@@ -25,14 +25,17 @@ This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`
   * Description: *Wheel on left, such as US, TW. Wheel on right like HK, JP.*
   * Settings are persistently stored (`PERSISTENT`) across reboots.
 
-### 3. 🍃 Gentle Acceleration & Early Smooth Deceleration
+### 3. 🍃 Gentle Acceleration & Gentle Braking
 * **Gentle Acceleration Setting**:
   * Added "Gentle Acceleration" setting under dp Longitudinal menu.
-  * Four configurable maximum launch acceleration limits: `1.0`, `1.2`, `1.4`, `1.6` m/s² (Default is **`1.2` m/s²**).
-  * Eliminates harsh takeoff punch (stock is 1.6 m/s²), providing silky smooth acceleration from a stop.
-* **Early Smooth Braking (2x Distance, 1/2 Deceleration)**:
-  * Eliminates abrupt late braking when approaching stopped or slow-moving lead vehicles at red lights.
-  * Initiates gentle deceleration at twice the original distance, halving the required deceleration to ~1.25 m/s² (compared to stock 2.5 m/s²).
+  * Four configurable maximum launch acceleration limits: `1.0`, `1.2`, `1.4`, `1.6` m/s^2 (Default is **`1.2` m/s^2**).
+  * Eliminates harsh takeoff punch (stock is 1.6 m/s^2), providing silky smooth acceleration from a stop.
+  * Resolved '?' character rendering issue by using standard `m/s^2` unit notation.
+* **Gentle Braking Setting**:
+  * Positioned right below "Gentle Acceleration" in the Longitudinal menu.
+  * Three distance multipliers: `1.5x`, `2.0x`, `2.5x` (Default is **`2.0x`**).
+  * Smoothly initiates deceleration when approaching stopped or slowing lead vehicles at 1.5x, 2.0x, or 2.5x the normal distance, reducing deceleration proportionally (~`1.0` to `1.67` m/s^2 vs stock aggressive `2.5` m/s^2).
+  * **Zero Safety Compromises**: Does not compromise AEB, forward collision warnings (FCW), or emergency evasive braking; if a lead car brakes hard or cuts in closely, bottom-level MPC constraints maintain full maximum braking deceleration (up to `-3.5 ~ -4.0 m/s^2`).
 
 ### 4. 🇹🇼 Full Traditional Chinese & Multilingual UI Support
 * **Localization Engine Refactor**:

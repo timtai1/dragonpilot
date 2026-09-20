@@ -550,6 +550,26 @@ msgid ""
 "device_ip&gt;:5088 to access.<br><br>Enable this to use Tesla Visual/HUD."
 msgstr "dashy - dragonpilot 全能系统中心。<br><br>访问 http://<设备IP>:5088 即可使用。<br><br>启用此选项以使用特斯拉视觉/HUD。"
 
+#: dragonpilot/settings/min-feat.lon.gentle-accel.py:8
+#, python-format
+msgid "Gentle Acceleration"
+msgstr "温和加速"
+
+#: dragonpilot/settings/min-feat.lon.gentle-accel.py:9
+#, python-format
+msgid "Limits launch acceleration (1.0 - 1.6 m/s^2). Default is 1.2 m/s^2. Provides smoother takeoffs."
+msgstr "限制起步加速度 (1.0 - 1.6 m/s^2)。默认值为 1.2 m/s^2。提供更平顺的起步体验。"
+
+#: dragonpilot/settings/min-feat.lon.gentle-brake.py:8
+#, python-format
+msgid "Gentle Braking"
+msgstr "温和刹车"
+
+#: dragonpilot/settings/min-feat.lon.gentle-brake.py:9
+#, python-format
+msgid "Smoothly slows down for stopped or slowing lead vehicles at 1.5x, 2.0x, or 2.5x the normal distance with proportionally reduced deceleration force."
+msgstr "接近减速或停等红灯的前车时，于正常刹车距离的 1.5x、2.0x 或 2.5x 倍距离提前平顺减速，刹车力道依倍数成比例减弱。"
+
 #: dragonpilot/settings/min-feat.ui.hide-hud.py:14
 #, python-format
 msgid "km/h"

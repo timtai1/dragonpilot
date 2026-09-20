@@ -81,6 +81,19 @@ class LongitudinalPlanner:
     self.params = Params()
     self.param_read_counter = 0
     self.max_launch_accel = 1.2
+    self.gentle_brake_mult = 2.0
+    try:
+      val = self.params.get("dp_lon_smooth_accel")
+      if val is not None:
+        self.max_launch_accel = [1.0, 1.2, 1.4, 1.6][int(val)]
+    except Exception:
+      pass
+    try:
+      val_brake = self.params.get("dp_lon_gentle_brake")
+      if val_brake is not None:
+        self.gentle_brake_mult = [1.5, 2.0, 2.5][int(val_brake)]
+    except Exception:
+      pass
 
   @staticmethod
   def parse_model(model_msg):
@@ -124,7 +137,7 @@ class LongitudinalPlanner:
     # No change cost when user is controlling the speed, or when standstill
     prev_accel_constraint = not (reset_state or sm['carState'].standstill)
 
-    # dp - read gentle acceleration setting (1.0, 1.2, 1.4, 1.6 m/s²)
+    # dp - read gentle acceleration (1.0, 1.2, 1.4, 1.6 m/s^2) and gentle braking (1.5x, 2.0x, 2.5x) settings
     self.param_read_counter += 1
     if self.param_read_counter % 50 == 0:
       try:
@@ -134,6 +147,16 @@ class LongitudinalPlanner:
           idx = int(val)
           if 0 <= idx < len(options):
             self.max_launch_accel = options[idx]
+      except Exception:
+        pass
+
+      try:
+        val_brake = self.params.get("dp_lon_gentle_brake")
+        if val_brake is not None:
+          brake_options = [1.5, 2.0, 2.5]
+          idx_brake = int(val_brake)
+          if 0 <= idx_brake < len(brake_options):
+            self.gentle_brake_mult = brake_options[idx_brake]
       except Exception:
         pass
 
@@ -160,16 +183,16 @@ class LongitudinalPlanner:
     if force_slow_decel:
       v_cruise = 0.0
 
-    # dp - Early smooth deceleration when approaching a stopped or slowing lead vehicle
-    # Standard openpilot only brakes when close (~40-50m at 54km/h) with heavy COMFORT_BRAKE = 2.5 m/s² (~0.26g).
-    # Here, we initiate gentle deceleration (~1.25 m/s², half of stock 2.5 m/s²) at ~2x distance.
+    # dp - Gentle braking when approaching a stopped or slowing lead vehicle
+    # Standard openpilot only brakes when close (~40-50m at 54km/h) with heavy COMFORT_BRAKE = 2.5 m/s^2 (~0.26g).
+    # Here, we initiate smooth deceleration at 1.5x, 2.0x, or 2.5x normal distance with proportionally reduced deceleration (2.5 / mult).
     lead = sm['radarState'].leadOne
     if lead.status and lead.modelProb > 0.4:
       v_lead = max(0.0, lead.vLead)
       if v_ego > v_lead:
         stop_buffer = 7.5
         d_eff = max(0.0, lead.dRel - stop_buffer)
-        a_gentle_decel = 1.25
+        a_gentle_decel = 2.5 / self.gentle_brake_mult
         v_smooth_target = math.sqrt(v_lead ** 2 + 2 * a_gentle_decel * d_eff)
         v_cruise = min(v_cruise, v_smooth_target)
 

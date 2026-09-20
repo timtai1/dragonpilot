@@ -557,8 +557,18 @@ msgstr "溫和加速"
 
 #: dragonpilot/settings/min-feat.lon.gentle-accel.py:9
 #, python-format
-msgid "Limits launch acceleration (1.0 - 1.6 m/s²). Default is 1.2 m/s². Provides smoother takeoffs."
-msgstr "限制起步加速度 (1.0 - 1.6 m/s²)。預設為 1.2 m/s²。提供更平順的起步體驗。"
+msgid "Limits launch acceleration (1.0 - 1.6 m/s^2). Default is 1.2 m/s^2. Provides smoother takeoffs."
+msgstr "限制起步加速度 (1.0 - 1.6 m/s^2)。預設為 1.2 m/s^2。提供更平順的起步體驗。"
+
+#: dragonpilot/settings/min-feat.lon.gentle-brake.py:8
+#, python-format
+msgid "Gentle Braking"
+msgstr "溫和煞車"
+
+#: dragonpilot/settings/min-feat.lon.gentle-brake.py:9
+#, python-format
+msgid "Smoothly slows down for stopped or slowing lead vehicles at 1.5x, 2.0x, or 2.5x the normal distance with proportionally reduced deceleration force."
+msgstr "接近減速或停等紅燈的前車時，於正常煞車距離的 1.5x、2.0x 或 2.5x 倍距離提前平順減速，煞車力道依倍數成比例減弱。"
 
 #: dragonpilot/settings/min-feat.ui.hide-hud.py:14
 #, python-format
