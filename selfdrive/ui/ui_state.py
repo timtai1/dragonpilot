@@ -198,6 +198,16 @@ class UIState:
     self.dp_ui_display_mode_cruise_available = False
     self.dp_ui_display_mode_cruise_enabled = False
 
+    # dp - GPS wheel position auto initialization
+    if self.sm.updated["gpsLocationExternal"]:
+      gps = self.sm["gpsLocationExternal"]
+      if gps.hasFix:
+        try:
+          from dragonpilot.system.geo_wheel import check_and_update_wheel_position_from_gps
+          check_and_update_wheel_position_from_gps(self.params, gps.latitude, gps.longitude)
+        except Exception:
+          pass
+
   def _update_status(self) -> None:
     if self.started and self.sm.updated["selfdriveState"]:
       ss = self.sm["selfdriveState"]

@@ -56,6 +56,13 @@ def main() -> NoReturn:
       continue
 
     set_time(gps_time)
+
+    try:
+      from dragonpilot.system.geo_wheel import check_and_update_wheel_position_from_gps
+      check_and_update_wheel_position_from_gps(params, gps.latitude, gps.longitude)
+    except Exception:
+      pass
+
     time.sleep(10)
 
 if __name__ == "__main__":

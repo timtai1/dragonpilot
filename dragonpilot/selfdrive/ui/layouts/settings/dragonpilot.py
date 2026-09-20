@@ -223,6 +223,9 @@ class DragonpilotLayout(Widget):
     def combined_callback(val, deps=parent_deps):
       if primary_action:
         primary_action(val)
+      if param_name == "dp_dev_is_rhd":
+        from dragonpilot.system.geo_wheel import set_wheel_position_manually_set
+        set_wheel_position_manually_set(True)
       for child_key, expr in deps:
         widget = self._toggles.get(child_key)
         if widget is not None:

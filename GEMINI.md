@@ -33,19 +33,21 @@ If SSH commands return `Connection timed out`, `Host is down`, or `No route to h
 
 ## Key Technical Architectures & Customizations
 
-### 1. Manual Wheel Position ("Wheel on Left or Right?")
+### 1. Steering Wheel Position: Offline GPS Country Auto-Init + Permanent Manual Lock
 - **Parameter**: `dp_dev_is_rhd` (Boolean, `PERSISTENT`)
   - `Left` (`0` / `False`): Left-hand drive (LHD, default for TW, US, etc.)
   - `Right` (`1` / `True`): Right-hand drive (RHD, for JP, HK, UK, etc.)
-- **Configuration Files**:
-  - `dragonpilot/settings/min-feat.dev.z-wheel-position.py`
-  - `dragonpilot/settings/min-feat.dev.z-wheel-position.yaml`
-  - Registered in `common/params_keys.h` (`dp_dev_is_rhd`, `BOOL`, `PERSISTENT`)
+- **Offline GPS Country Initialization**:
+  - Implemented in `dragonpilot/system/geo_wheel.py`.
+  - On first GPS fix (`hasFix == True`), if the user has not manually set the wheel position, the device compares coordinates against lightweight offline bounding areas (covering Japan, HK, Macau, UK, Australia, New Zealand, Singapore, Malaysia, Thailand, Indonesia, South Africa, etc.).
+  - Presets `dp_dev_is_rhd` to `True` (RHD) if in an RHD region, otherwise `False` (LHD). Zero network dependencies.
+- **Manual Lock**:
+  - Toggling `Left` or `Right` in the dp settings menu marks `dp_dev_wheel_position_manually_set` to `True`.
+  - Once manually set, GPS detection is permanently bypassed and will never override user preference.
 - **Driver Monitoring Logic**:
   - In `selfdrive/monitoring/policy.py`, the dynamic camera/facial feature statistical model for guessing wheel position was removed.
   - The driver monitor now purely uses `self.wheel_on_right = self.params.get_bool("dp_dev_is_rhd")`.
   - Also updated in `selfdrive/monitoring/dmonitoringd.py` and `selfdrive/ui/onroad/driver_camera_dialog.py`.
-- **Behavior**: The setting is completely manual and **will never automatically change** across borders or countries.
 
 ### 2. Multi-language Localization
 - **Implementation**: `dragonpilot/system/ui/lib/multilang.py` loads `dragonpilot_{lang}.po` files directly at runtime using a pure-Python PO parser (no compilation into `.mo` needed).
