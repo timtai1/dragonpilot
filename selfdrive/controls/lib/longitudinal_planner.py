@@ -37,8 +37,8 @@ class DPFlags:
   pass
 
 
-def get_max_accel(v_ego, max_launch_accel=1.2):
-  vals = [max_launch_accel, min(max_launch_accel, 1.2), 0.8, 0.6]
+def get_max_accel(v_ego, accel_mult=0.8):
+  vals = [v * accel_mult for v in A_CRUISE_MAX_VALS]
   return np.interp(v_ego, A_CRUISE_MAX_BP, vals)
 
 def get_coast_accel(pitch):
@@ -80,12 +80,12 @@ class LongitudinalPlanner:
     self.apm = APM()
     self.params = Params()
     self.param_read_counter = 0
-    self.max_launch_accel = 1.2
+    self.accel_mult = 0.8
     self.gentle_brake_mult = 2.0
     try:
       val = self.params.get("dp_lon_smooth_accel")
       if val is not None:
-        self.max_launch_accel = [1.0, 1.2, 1.4, 1.6][int(val)]
+        self.accel_mult = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0][int(val)]
     except Exception:
       pass
     try:
@@ -137,16 +137,16 @@ class LongitudinalPlanner:
     # No change cost when user is controlling the speed, or when standstill
     prev_accel_constraint = not (reset_state or sm['carState'].standstill)
 
-    # dp - read gentle acceleration (1.0, 1.2, 1.4, 1.6 m/s^2) and gentle braking (1.5x, 2.0x, 2.5x) settings
+    # dp - read gentle acceleration (0.5x - 1.0x) and gentle braking (1.5x, 2.0x, 2.5x) settings
     self.param_read_counter += 1
     if self.param_read_counter % 50 == 0:
       try:
         val = self.params.get("dp_lon_smooth_accel")
         if val is not None:
-          options = [1.0, 1.2, 1.4, 1.6]
+          options = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
           idx = int(val)
           if 0 <= idx < len(options):
-            self.max_launch_accel = options[idx]
+            self.accel_mult = options[idx]
       except Exception:
         pass
 
@@ -160,7 +160,7 @@ class LongitudinalPlanner:
       except Exception:
         pass
 
-    accel_clip = [ACCEL_MIN, get_max_accel(v_ego, self.max_launch_accel)]
+    accel_clip = [ACCEL_MIN, get_max_accel(v_ego, self.accel_mult)]
     steer_angle_without_offset = sm['carState'].steeringAngleDeg - sm['liveParameters'].angleOffsetDeg
     accel_clip = limit_accel_in_turns(v_ego, steer_angle_without_offset, accel_clip, self.CP)
 
@@ -202,6 +202,7 @@ class LongitudinalPlanner:
 
     self.mpc.set_weights(prev_accel_constraint, personality=personality)
     self.mpc.set_cur_state(self.v_desired_filter.x, self.a_desired)
+    self.mpc.cruise_max_accel = 1.6 * self.accel_mult
     self.mpc.update(sm['radarState'], v_cruise, personality=personality)
 
     self.v_desired_trajectory = np.interp(CONTROL_N_T_IDX, T_IDXS_MPC, self.mpc.v_solution)

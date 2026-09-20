@@ -28,8 +28,9 @@ This repository is a customized fork based on openpilot / dragonpilot (`v0.11.1`
 ### 3. 🍃 Gentle Acceleration & Gentle Braking
 * **Gentle Acceleration Setting**:
   * Added "Gentle Acceleration" setting under dp Longitudinal menu.
-  * Four configurable maximum launch acceleration limits: `1.0`, `1.2`, `1.4`, `1.6` m/s^2 (Default is **`1.2` m/s^2**).
-  * Eliminates harsh takeoff punch (stock is 1.6 m/s^2), providing silky smooth acceleration from a stop.
+  * Six configurable acceleration multipliers: `0.5x`, `0.6x`, `0.7x`, `0.8x`, `0.9x`, `1.0x` (Default is **`0.8x`**).
+  * **Applies to Both Takeoff and Mid-Drive Acceleration**: Eliminates aggressive full-throttle surges not just from standstill, but crucially when a lead car changes lanes or speeds away during cruising.
+  * **Proportional Multiplier for All Vehicle Types**: Scales both the entire velocity-dependent acceleration limit curve and the MPC virtual cruise target by the multiplier (e.g. at 0.8x, limits are $1.28\text{ m/s}^2$ at 0 km/h, $0.96\text{ m/s}^2$ at 36 km/h, $0.64\text{ m/s}^2$ at 90 km/h), providing silky smooth throttle for EVs, hybrids, and gas cars alike.
   * Resolved '?' character rendering issue by using standard `m/s^2` unit notation.
 * **Gentle Braking Setting**:
   * Positioned right below "Gentle Acceleration" in the Longitudinal menu.

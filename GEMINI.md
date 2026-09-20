@@ -67,13 +67,15 @@ If SSH commands return `Connection timed out`, `Host is down`, or `No route to h
 
 ### 4. Gentle Acceleration & Gentle Braking
 - **Parameters**:
-  - `dp_lon_smooth_accel` (Int: `0=1.0`, `1=1.2`, `2=1.4`, `3=1.6` m/s^2, default index 1: `1.2` m/s^2)
+  - `dp_lon_smooth_accel` (Int: `0=0.5x`, `1=0.6x`, `2=0.7x`, `3=0.8x`, `4=0.9x`, `5=1.0x` acceleration multiplier, default index 3: `0.8x`)
   - `dp_lon_gentle_brake` (Int: `0=1.5x`, `1=2.0x`, `2=2.5x` distance multiplier, default index 1: `2.0x`)
 - **Implementation**:
   - `dragonpilot/settings/min-feat.lon.gentle-accel.yaml` / `.py`
   - `dragonpilot/settings/min-feat.lon.gentle-brake.yaml` / `.py`
+  - In `selfdrive/controls/lib/longitudinal_mpc_lib/long_mpc.py`:
+    - `self.cruise_max_accel` scales the virtual cruise obstacle ramp for MPC path optimization.
   - In `selfdrive/controls/lib/longitudinal_planner.py`:
-    - `get_max_accel(v_ego, self.max_launch_accel)` limits launch acceleration from standstill.
+    - `get_max_accel(v_ego, self.accel_mult)` scales the entire velocity-dependent acceleration limit curve (`A_CRUISE_MAX_VALS * accel_mult`).
     - Early smooth deceleration when closing in on slowing or stopped lead vehicles: calculates $v_{\text{smooth\_target}} = \sqrt{v_{\text{lead}}^2 + 2 \cdot a_{\text{gentle}} \cdot d_{\text{eff}}}$ with $a_{\text{gentle}} = 2.5 / \text{mult}\ \text{m/s}^2$ (default index 1 = $1.25\ \text{m/s}^2$ at 2x distance).
     - Hard safety constraints and emergency braking in MPC remain completely intact and unaffected.
 
