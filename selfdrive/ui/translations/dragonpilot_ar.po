@@ -470,6 +470,52 @@ msgid "sec"
 msgstr ""
 
 #, python-format
+
+msgid "Wheel on Left or Right?"
+msgstr "عجلة القيادة على اليسار أم اليمين؟"
+
+msgid "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+msgstr "عجلة القيادة على اليسار (مثل أمريكا، تايوان). على اليمين (مثل هونغ كونغ، اليابان)."
+
+msgid "Left"
+msgstr "يسار"
+
+msgid "Right"
+msgstr "يمين"
+
+msgid "Lateral"
+msgstr "التحكم الجانبي"
+
+msgid "Longitudinal"
+msgstr "التحكم الطولي"
+
+msgid "UI"
+msgstr "واجهة المستخدم"
+
+msgid "Device"
+msgstr "الجهاز"
+
+msgid "Openpilot"
+msgstr "Openpilot"
+
+msgid "Developer"
+msgstr "المطور"
+
+msgid "Toyota / Lexus"
+msgstr "Toyota / Lexus"
+
+msgid "Honda"
+msgstr "Honda"
+
+msgid "HKG"
+msgstr "HKG"
+
+msgid "VAG"
+msgstr "VAG"
+
+msgid "Mazda"
+msgstr "Mazda"
+
 #~ msgid " km/h"
 #~ msgstr " كم/س"
 

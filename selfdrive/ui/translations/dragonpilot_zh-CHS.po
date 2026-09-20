@@ -52,7 +52,7 @@ msgstr "根据驾驶情境自动在 ACC 和混合模式间切换。"
 #: dragonpilot/settings/openpilot.toggles.py:89
 #, python-format
 msgid "Aggressive"
-msgstr ""
+msgstr "激进"
 
 #: dragonpilot/settings/min-feat.ui.lead-stats.py:10
 #, python-format
@@ -68,7 +68,7 @@ msgstr "允许 openpilot 在右驾车辆上遵循右侧通行规则。"
 #: dragonpilot/settings/openpilot.toggles.py:50
 #, python-format
 msgid "Always-On Driver Monitoring"
-msgstr ""
+msgstr "始终启用驾驶员监控"
 
 #: dragonpilot/settings/min-feat.lat.alka-v2.py:8
 #, python-format
@@ -123,7 +123,7 @@ msgstr "将遥测数据广播至 opview 应用程序 (Android 适用)。"
 #: dragonpilot/settings/openpilot.developer.py:76
 #, python-format
 msgid "Clear SSH Keys"
-msgstr ""
+msgstr "清除 SSH 密钥"
 
 #: dragonpilot/settings/min-feat.dev.delay-loggerd.py:8
 #, python-format
@@ -155,17 +155,17 @@ msgstr "如果您不希望上传数据或被服务追踪，请停用 Comma Conne
 #: dragonpilot/settings/openpilot.toggles.py:74
 #, python-format
 msgid "Disable Logging"
-msgstr ""
+msgstr "禁用日志记录"
 
 #: dragonpilot/settings/openpilot.toggles.py:80
 #, python-format
 msgid "Disable Updates"
-msgstr ""
+msgstr "禁用更新"
 
 #: dragonpilot/settings/openpilot.toggles.py:38
 #, python-format
 msgid "Disengage on Accelerator Pedal"
-msgstr ""
+msgstr "踩下加速踏板时退出"
 
 #: dragonpilot/settings/min-feat.ui.lead-stats.py:8
 #, python-format
@@ -195,12 +195,12 @@ msgstr "车门自动锁定/解锁"
 #: dragonpilot/settings/openpilot.toggles.py:87
 #, python-format
 msgid "Driving Personality"
-msgstr ""
+msgstr "驾驶风格"
 
 #: dragonpilot/settings/openpilot.developer.py:29
 #, python-format
 msgid "Enable ADB"
-msgstr ""
+msgstr "启用 ADB"
 
 #: dragonpilot/settings/min-feat.lon.acm.py:8
 #, python-format
@@ -215,7 +215,7 @@ msgstr "启用蜂鸣器（警告）"
 #: dragonpilot/settings/openpilot.toggles.py:44
 #, python-format
 msgid "Enable Lane Departure Warnings"
-msgstr ""
+msgstr "启用车道偏离预警"
 
 #: dragonpilot/settings/min-feat.dev.o3-v2.py:8
 #, python-format
@@ -225,22 +225,22 @@ msgstr "启用右驾模式"
 #: dragonpilot/settings/openpilot.developer.py:35
 #, python-format
 msgid "Enable SSH"
-msgstr ""
+msgstr "启用 SSH"
 
 #: dragonpilot/settings/brand-vag-a0-sng.py:8
 #, python-format
 msgid "Enable Stop-and-Go on A0 Platform"
-msgstr ""
+msgstr "在 A0 平台启用跟车起步 (Stop-and-Go)"
 
 #: dragonpilot/settings/brand-toyota-tss1-sng.py:8
 #, python-format
 msgid "Enable Stop-and-Go on TSS1"
-msgstr ""
+msgstr "在 TSS1 启用跟车起步 (Stop-and-Go)"
 
 #: dragonpilot/settings/min-feat.dev.dashy-v2.py:8
 #, python-format
 msgid "Enable dashy Visual"
-msgstr ""
+msgstr "启用 dashy 视觉界面"
 
 #: dragonpilot/settings/min-feat.lat.alka-v2.py:9
 #, python-format
@@ -254,7 +254,7 @@ msgstr ""
 #: dragonpilot/settings/openpilot.toggles.py:27
 #, python-format
 msgid "Enable openpilot"
-msgstr ""
+msgstr "启用 openpilot"
 
 #: dragonpilot/settings/brand.toyota.door-auto-lock-unlock.py:9
 #, python-format
@@ -271,7 +271,7 @@ msgstr "启用 opview"
 #: dragonpilot/settings/openpilot.toggles.py:33
 #, python-format
 msgid "Experimental Mode"
-msgstr ""
+msgstr "实验模式"
 
 #: dragonpilot/settings/min-feat.lat.lat-offset.py:9
 #, python-format
@@ -286,7 +286,7 @@ msgstr ""
 #: dragonpilot/settings/openpilot.developer.py:64
 #, python-format
 msgid "GitHub Username (SSH Keys)"
-msgstr ""
+msgstr "GitHub 用户名 (SSH 密钥)"
 
 #: dragonpilot/settings/min-feat.ui.hide-hud.py:8
 #, python-format
@@ -296,7 +296,7 @@ msgstr "行驶超过此速度时隐藏 HUD："
 #: dragonpilot/settings/openpilot.developer.py:40
 #, python-format
 msgid "Joystick Debug Mode"
-msgstr ""
+msgstr "手柄调试模式"
 
 #: dragonpilot/settings/min-feat.lat.lca.py:8
 #, python-format
@@ -306,7 +306,7 @@ msgstr "变换车道辅助启用速度："
 #: dragonpilot/settings/openpilot.developer.py:85
 #, python-format
 msgid "Last Errors"
-msgstr ""
+msgstr "最近错误"
 
 #: dragonpilot/settings/min-feat.ui.lead-stats.py:10
 #, python-format
@@ -318,19 +318,19 @@ msgstr "前车"
 msgid ""
 "Let the Honda Nidec ACC handle gas and brake instead of openpilot. Lateral "
 "control (steering) still runs through openpilot."
-msgstr ""
+msgstr "由 Honda Nidec 原厂 ACC 负责油门和刹车，而非 openpilot。横向控制（转向）仍由 openpilot 处理。"
 
 #: dragonpilot/settings/brand-toyota-stock-lon.py:9
 #, python-format
 msgid ""
 "Let the car's built-in ACC handle gas and brake instead of openpilot. "
 "Lateral control (steering) still runs through openpilot."
-msgstr ""
+msgstr "由车辆自带 ACC 负责油门和刹车，而非 openpilot。横向控制（转向）仍由 openpilot 处理。"
 
 #: dragonpilot/settings/openpilot.developer.py:45
 #, python-format
 msgid "Longitudinal Maneuver Mode"
-msgstr ""
+msgstr "纵向微调模式"
 
 #: dragonpilot/settings/min-feat.ui.display-mode.py:10
 #, python-format
@@ -396,17 +396,17 @@ msgstr "彩虹行驶路径（类似特斯拉）"
 #: dragonpilot/settings/openpilot.toggles.py:56
 #, python-format
 msgid "Record and Upload Driver Camera"
-msgstr ""
+msgstr "录制并上传驾驶员摄像头"
 
 #: dragonpilot/settings/openpilot.toggles.py:62
 #, python-format
 msgid "Record and Upload Microphone Audio"
-msgstr ""
+msgstr "录制并上传麦克风音频"
 
 #: dragonpilot/settings/openpilot.toggles.py:89
 #, python-format
 msgid "Relaxed"
-msgstr ""
+msgstr "舒适"
 
 #: dragonpilot/selfdrive/ui/layouts/settings/dragonpilot.py:239
 #, python-format
@@ -428,7 +428,7 @@ msgstr "将 dragonpilot 设定重置为默认值并重新启动设备。"
 msgid ""
 "Restores stop-and-go behavior on Toyota Safety Sense 1.0 vehicles, allowing "
 "openpilot to resume from a full stop without driver intervention."
-msgstr ""
+msgstr "恢复 Toyota Safety Sense 1.0 车辆的跟车起步 (Stop-and-Go) 功能，允许 openpilot 在完全静止后无需驾驶员介入即可自动起步。"
 
 #: dragonpilot/settings/brand-vag-a0-sng.py:9
 #, python-format
@@ -436,7 +436,7 @@ msgid ""
 "Restores stop-and-go behavior on VAG A0 platform vehicles (Polo, Fabia, "
 "Ibiza, etc.), allowing openpilot to resume from a full stop without driver "
 "intervention."
-msgstr ""
+msgstr "恢复 VAG A0 平台车辆 (Polo, Fabia, Ibiza 等) 的跟车起步 (Stop-and-Go) 功能，允许 openpilot 在完全静止后无需驾驶员介入即可自动起步。"
 
 #: dragonpilot/settings/min-feat.lat.road-edge-detection.py:8
 #, python-format
@@ -446,7 +446,7 @@ msgstr "道路边缘侦测 (RED)"
 #: dragonpilot/settings/brand-vag-avoid-eps-lockout.py:9
 #, python-format
 msgid "Scale steering torque down at low speeds to avoid EPS lockout."
-msgstr ""
+msgstr "低速时降低转向扭矩以避免电子转向 (EPS) 锁死。"
 
 #: dragonpilot/settings/min-feat.lon.ext-radar.py:9
 #, python-format
@@ -458,7 +458,7 @@ msgstr "详情请参阅 https://github.com/eFiniLan/openpilot-ext-radar-addon。
 #: dragonpilot/settings/openpilot.toggles.py:89
 #, python-format
 msgid "Standard"
-msgstr ""
+msgstr "标准"
 
 #: dragonpilot/settings/min-feat.ui.display-mode.py:10
 #: dragonpilot/settings/min-feat.dev.alert-mode.py:10
@@ -487,7 +487,7 @@ msgstr ""
 #: dragonpilot/settings/openpilot.developer.py:71
 #, python-format
 msgid "Stored SSH Keys"
-msgstr ""
+msgstr "已保存的 SSH 密钥"
 
 #: dragonpilot/settings/min-feat.ui.hide-hud.py:9
 #, python-format
@@ -501,7 +501,7 @@ msgstr ""
 #: dragonpilot/settings/openpilot.developer.py:56
 #, python-format
 msgid "UI Debug Mode"
-msgstr ""
+msgstr "界面调试模式"
 
 #: dragonpilot/settings/min-feat.dev.o3-v2.py:20
 #, python-format
@@ -516,12 +516,12 @@ msgstr "使用外部雷达"
 #: dragonpilot/settings/openpilot.toggles.py:68
 #, python-format
 msgid "Use Metric System"
-msgstr ""
+msgstr "使用公制单位"
 
 #: dragonpilot/settings/brand-honda-nidec-stock-long.py:8
 #, python-format
 msgid "Use Stock Longitudinal (Nidec)"
-msgstr ""
+msgstr "使用原厂纵向控制 (Nidec)"
 
 #: dragonpilot/settings/brand-toyota-stock-lon.py:8
 #, python-format
@@ -548,7 +548,7 @@ msgstr "厘米"
 msgid ""
 "dashy - dragonpilot's all-in-one system hub.<br><br>Visit http://&lt;"
 "device_ip&gt;:5088 to access.<br><br>Enable this to use Tesla Visual/HUD."
-msgstr ""
+msgstr "dashy - dragonpilot 全能系统中心。<br><br>访问 http://<设备IP>:5088 即可使用。<br><br>启用此选项以使用特斯拉视觉/HUD。"
 
 #: dragonpilot/settings/min-feat.ui.hide-hud.py:14
 #, python-format
@@ -568,7 +568,7 @@ msgstr "mph"
 #: dragonpilot/settings/openpilot.developer.py:50
 #, python-format
 msgid "openpilot Longitudinal Control (Alpha)"
-msgstr ""
+msgstr "openpilot 纵向控制 (Alpha)"
 
 #: dragonpilot/selfdrive/ui/mici/layouts/dashy_qrcode.py:18
 #, python-format
@@ -587,6 +587,52 @@ msgid "sec"
 msgstr "秒"
 
 #, python-format
+
+msgid "Wheel on Left or Right?"
+msgstr "方向盘在左边还是右边？"
+
+msgid "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+msgstr "方向盘在左边（如美、台）；方向盘在右边（如港、日）。"
+
+msgid "Left"
+msgstr "左 (Left)"
+
+msgid "Right"
+msgstr "右 (Right)"
+
+msgid "Lateral"
+msgstr "横向控制"
+
+msgid "Longitudinal"
+msgstr "纵向控制"
+
+msgid "UI"
+msgstr "用户界面"
+
+msgid "Device"
+msgstr "设备"
+
+msgid "Openpilot"
+msgstr "Openpilot"
+
+msgid "Developer"
+msgstr "开发者"
+
+msgid "Toyota / Lexus"
+msgstr "Toyota / Lexus"
+
+msgid "Honda"
+msgstr "Honda"
+
+msgid "HKG"
+msgstr "HKG"
+
+msgid "VAG"
+msgstr "VAG"
+
+msgid "Mazda"
+msgstr "Mazda"
+
 #~ msgid " km/h"
 #~ msgstr " 公里/时"
 

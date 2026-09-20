@@ -48,7 +48,7 @@ from cereal import messaging
 
 from openpilot.common.params import Params
 from openpilot.system.hardware import PC, HARDWARE
-from openpilot.system.ui.lib.multilang import multilang as base_multilang
+from dragonpilot.system.ui.lib.multilang import multilang as base_multilang, tr
 from dragonpilot.settings import SETTINGS
 
 try:
@@ -401,6 +401,7 @@ async def get_settings_config_api(request):
             continue
 
         section_copy = section.copy()
+        section_copy['title'] = tr(section.get('title', ''))
         settings_list = []
 
         for setting in section.get('settings', []):

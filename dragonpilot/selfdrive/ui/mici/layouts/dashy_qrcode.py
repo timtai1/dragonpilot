@@ -2,7 +2,7 @@ import pyray as rl
 from openpilot.system.ui.widgets import Widget
 from openpilot.system.ui.widgets.label import UnifiedLabel
 from openpilot.system.ui.lib.application import gui_app, FontWeight
-from openpilot.system.ui.lib.multilang import tr
+from dragonpilot.system.ui.lib.multilang import tr
 from dragonpilot.selfdrive.ui.dashy_qr import DashyQR
 
 

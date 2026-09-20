@@ -73,7 +73,7 @@ class DragonpilotLayout(Widget):
         continue
 
       title_key = f"title_{i}"
-      self._toggles[title_key] = simple_item(title=f"### {section['title']} ###")
+      self._toggles[title_key] = simple_item(title=lambda t=section['title']: f"### {tr(t)} ###")
       count_after_title = len(self._toggles)
 
       for setting in section.get("settings", []):
@@ -188,7 +188,14 @@ class DragonpilotLayout(Widget):
         primary_action = lambda val, p=param_name: ui_state.params.put_bool(p, bool(val))
       elif item_type == "double_spin_button_item":
         primary_action = lambda val, p=param_name: ui_state.params.put(p, float(val))
-      else: # spin_button_item, text_spin_button_item
+      elif item_type == "text_spin_button_item":
+        def _put_text_spin(val, p=param_name):
+          try:
+            ui_state.params.put(p, int(val))
+          except TypeError:
+            ui_state.params.put_bool(p, bool(val))
+        primary_action = _put_text_spin
+      else: # spin_button_item
         primary_action = lambda val, p=param_name: ui_state.params.put(p, int(val))
 
     # When this item changes, re-evaluate every child that depends on it

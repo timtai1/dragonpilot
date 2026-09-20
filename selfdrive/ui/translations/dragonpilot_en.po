@@ -569,3 +569,49 @@ msgstr "scan to access"
 #, python-format
 msgid "sec"
 msgstr ""
+
+msgid "Wheel on Left or Right?"
+msgstr "Wheel on Left or Right?"
+
+msgid "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+msgstr "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+
+msgid "Left"
+msgstr "Left"
+
+msgid "Right"
+msgstr "Right"
+
+msgid "Lateral"
+msgstr "Lateral"
+
+msgid "Longitudinal"
+msgstr "Longitudinal"
+
+msgid "UI"
+msgstr "UI"
+
+msgid "Device"
+msgstr "Device"
+
+msgid "Openpilot"
+msgstr "Openpilot"
+
+msgid "Developer"
+msgstr "Developer"
+
+msgid "Toyota / Lexus"
+msgstr "Toyota / Lexus"
+
+msgid "Honda"
+msgstr "Honda"
+
+msgid "HKG"
+msgstr "HKG"
+
+msgid "VAG"
+msgstr "VAG"
+
+msgid "Mazda"
+msgstr "Mazda"
+

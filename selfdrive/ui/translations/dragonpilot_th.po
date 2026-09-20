@@ -589,6 +589,52 @@ msgid "sec"
 msgstr ""
 
 #, python-format
+
+msgid "Wheel on Left or Right?"
+msgstr "พวงมาลัยซ้ายหรือขวา?"
+
+msgid "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+msgstr "พวงมาลัยซ้าย (เช่น สหรัฐฯ, ไต้หวัน) พวงมาลัยขวา (เช่น ไทย, ฮ่องกง, ญี่ปุ่น)"
+
+msgid "Left"
+msgstr "ซ้าย (Left)"
+
+msgid "Right"
+msgstr "ขวา (Right)"
+
+msgid "Lateral"
+msgstr "การควบคุมแนวขวาง"
+
+msgid "Longitudinal"
+msgstr "การควบคุมแนวยาว"
+
+msgid "UI"
+msgstr "ส่วนติดต่อผู้ใช้"
+
+msgid "Device"
+msgstr "อุปกรณ์"
+
+msgid "Openpilot"
+msgstr "Openpilot"
+
+msgid "Developer"
+msgstr "นักพัฒนา"
+
+msgid "Toyota / Lexus"
+msgstr "Toyota / Lexus"
+
+msgid "Honda"
+msgstr "Honda"
+
+msgid "HKG"
+msgstr "HKG"
+
+msgid "VAG"
+msgstr "VAG"
+
+msgid "Mazda"
+msgstr "Mazda"
+
 #~ msgid " km/h"
 #~ msgstr " กม./ชม."
 

@@ -558,15 +558,61 @@ msgstr ""
 #: dragonpilot/selfdrive/ui/mici/layouts/dashy_qrcode.py:18
 #, python-format
 msgid "or open browser"
-msgstr ""
+msgstr "або відкрийте браузер"
 
 #: dragonpilot/selfdrive/ui/mici/layouts/dashy_qrcode.py:14
 #, python-format
 msgid "scan to access"
-msgstr ""
+msgstr "Відскануйте для доступу"
 
 #: dragonpilot/settings/min-feat.dev.delay-loggerd.py:14
 #: dragonpilot/settings/min-feat.lat.lca.py:29
 #, python-format
 msgid "sec"
 msgstr ""
+
+msgid "Wheel on Left or Right?"
+msgstr "Кермо зліва чи справа?"
+
+msgid "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+msgstr "Кермо зліва (наприклад, UA, US, TW). Кермо справа (наприклад, HK, JP)."
+
+msgid "Left"
+msgstr "Зліва"
+
+msgid "Right"
+msgstr "Справа"
+
+msgid "Lateral"
+msgstr "Бічне керування"
+
+msgid "Longitudinal"
+msgstr "Поздовжнє керування"
+
+msgid "UI"
+msgstr "Інтерфейс користувача"
+
+msgid "Device"
+msgstr "Пристрій"
+
+msgid "Openpilot"
+msgstr "Openpilot"
+
+msgid "Developer"
+msgstr "Розробник"
+
+msgid "Toyota / Lexus"
+msgstr "Toyota / Lexus"
+
+msgid "Honda"
+msgstr "Honda"
+
+msgid "HKG"
+msgstr "HKG"
+
+msgid "VAG"
+msgstr "VAG"
+
+msgid "Mazda"
+msgstr "Mazda"
+

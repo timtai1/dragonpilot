@@ -599,6 +599,52 @@ msgid "sec"
 msgstr ""
 
 #, python-format
+
+msgid "Wheel on Left or Right?"
+msgstr "Direksiyon solda mı sağda mı?"
+
+msgid "Wheel on left, such as US, TW. Wheel on right like HK, JP."
+msgstr "Direksiyon solda (örn. TR, US, TW). Direksiyon sağda (örn. HK, JP)."
+
+msgid "Left"
+msgstr "Sol"
+
+msgid "Right"
+msgstr "Sağ"
+
+msgid "Lateral"
+msgstr "Yanal Kontrol"
+
+msgid "Longitudinal"
+msgstr "Boylamsal Kontrol"
+
+msgid "UI"
+msgstr "Kullanıcı Arayüzü"
+
+msgid "Device"
+msgstr "Cihaz"
+
+msgid "Openpilot"
+msgstr "Openpilot"
+
+msgid "Developer"
+msgstr "Geliştirici"
+
+msgid "Toyota / Lexus"
+msgstr "Toyota / Lexus"
+
+msgid "Honda"
+msgstr "Honda"
+
+msgid "HKG"
+msgstr "HKG"
+
+msgid "VAG"
+msgstr "VAG"
+
+msgid "Mazda"
+msgstr "Mazda"
+
 #~ msgid " km/h"
 #~ msgstr " km/s"
 
